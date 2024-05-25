@@ -1,0 +1,13 @@
+.cont{
+    list-style: none;
+    display: flex;
+    gap: 10px;
+    font-size: 30px;
+}
+
+.active {
+    color: orangered;
+}
+.active:hover{
+    color: orangered;
+}
