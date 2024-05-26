@@ -1,13 +1,13 @@
-import toast, { Toaster } from "react-hot-toast";
+
 import { Link } from "react-router-dom";
 
-export default function NotFoundPage() {
-  const errorURL = toast.error("Такой страницы нету");
-  
-  return (
-    <div>
-      <Toaster />
-      <p>Пес, перейди обратно <Link to='/'>в будку! </Link></p>
-    </div>
-  );
+const NotFoundPage = () => {
+    return (
+        <>
+            <h1>Page is not found</h1>
+            <Link to="/">Go back to Home</Link>
+        </>
+    )
 }
+
+export default NotFoundPage;
