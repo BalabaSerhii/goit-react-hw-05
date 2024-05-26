@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
-import { useLocation, useParams, Link } from "react-router-dom";
+import { useLocation, useParams, Link, Outlet } from "react-router-dom";
 import { fetchFilmsDetails } from "../../api-film";
 
 const MovieDetailsPage = () => {
@@ -51,13 +51,47 @@ const MovieDetailsPage = () => {
               poster_path
                 ? `https://image.tmdb.org/t/p/w300${poster_path}`
                 : `https://image.tmdb.org/t/p/w300${backdrop_path}`
-            } loading="lazy"
+            }
+            loading="lazy"
             alt="Image of film"
           />
         </div>
         <h1>{original_title}</h1>
-        
+        {popularity && <p>User score: {popularity}</p>}
+        {overview && <h2>Overview</h2>}
+        {overview && <p>{overview}</p>}
+        {genres && genres.length > 0 && (
+          <div>
+            <h2>Genres</h2>
+            <ul>
+              {genres.map(({ id, name }) => (
+                <li key={id}>{name}</li>
+              ))}
+            </ul>
+          </div>
+        )}
+
+        <div>
+          <h3>Additional information</h3>
+          <ul>
+            <li>
+              <Link to={cast} state={{ from: location.state?.from }}>
+                Cast
+              </Link>
+            </li>
+            <li>
+              <Link to={reviews} state={{ from: location.state?.from }}>
+                Reviews
+              </Link>
+            </li>
+          </ul>
+        </div>
+        <Suspense fallback={<div>Loading...</div>}>
+          <Outlet />
+        </Suspense>
       </div>
     </main>
   );
 };
+
+export default MovieDetailsPage;
