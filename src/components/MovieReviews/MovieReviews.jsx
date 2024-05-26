@@ -34,9 +34,9 @@ const MovieReviews = () => {
       {error && <Toaster />}
       <ul>
         {review.length > 0
-          ? review.map(({ id, autor, content }) => (
+          ? review.map(({ id, author, content }) => (
               <li key={id}>
-                <h3>Autor: {autor}</h3>
+                <h3>Autor: {author}</h3>
                 <p>{content}</p>
               </li>
             ))
@@ -45,6 +45,5 @@ const MovieReviews = () => {
     </div>
   );
 };
-
 
 export default MovieReviews;
